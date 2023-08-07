@@ -1,4 +1,4 @@
-# Data Modeling
+# Modeling
 Understanding Data Modeling: A Guide to Efficient Data Structures for ETL Processes
 
 ## Introduction:

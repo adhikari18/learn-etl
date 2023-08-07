@@ -1,4 +1,4 @@
-# ETL Optimization
+# Optimization
 Enhance Performance and Scalability: Techniques for Optimizing ETL Processes
 
 ## Introduction:

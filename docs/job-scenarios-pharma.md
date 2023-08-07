@@ -1,4 +1,4 @@
-# Talend Best Practices
+# Best Practice
 Best Practices for Using Talend in the Pharmaceutical Industry
 
 ## Introduction:

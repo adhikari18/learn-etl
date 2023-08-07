@@ -53,7 +53,6 @@ nav:
     - 'etl-optimization.md'
     - 'sql.md'
     - 'data-modeling.md'
-    - 'data-transformation.md'
     - 'redshift.md'
     - 'control-m.md'
     - 'autosys.md'

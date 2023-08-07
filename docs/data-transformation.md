@@ -1,4 +1,4 @@
-# Data Transformation Techniques
+# Data Transformation
 Master Data Transformation Techniques: Ensuring Data Quality and Consistency
 
 ## Introduction:

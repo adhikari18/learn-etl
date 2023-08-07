@@ -52,6 +52,7 @@ Remember, becoming an ETL developer requires continuous learning and hands-on ex
 - [Data Modeling](data-modeling.md)
 - [Data Transformation](data-transformation.md)
 - [Talend Overview](talend.md)
+- [Unit Test Jobs](unit-test.md)
 - [AWS Glue](aws-glue.md)
 - [Control-M Overview](control-m.md)
 - [Autosys Overview](autosys.md)

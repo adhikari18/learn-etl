@@ -47,17 +47,17 @@ In a sales dataset, some transactions may not have recorded the quantity sold. D
 ## Data Encoding:
 Data encoding is the process of converting categorical data into numerical values. Many machine learning algorithms require numerical input, making data encoding crucial for predictive modeling.
 ### Example:
-In a dataset with customer categories like "Gold," "Silver," and "Bronze," data encoding replaces these categories with numerical values (e.g., 1, 2, and 3) for machine learning algorithms.
+In a dataset with customer categories like 'Gold', 'Silver' and 'Bronze' data encoding replaces these categories with numerical values ( e.g. 1, 2, and 3 ) for machine learning algorithms.
 
 ## Data Binning:
 Data binning involves grouping numerical data into discrete bins or intervals. This technique simplifies data analysis and reduces the impact of outliers.
 ### Example:
-In a dataset with customer ages, data binning can group ages into bins like "0-20," "21-40," "41-60," and "61-80" for better age-group analysis.
+In a dataset with customer ages, data binning can group ages into bins like '0-20', '21-40', '41-60', and '61-80' for better age-group analysis.
 
 ## Data Discretization:
 Data discretization converts continuous data into categorical data by creating bins or intervals. It is useful when analyzing trends or patterns in continuous data.
 ### Example:
-A dataset with product prices can be discretized into categories like "Low Price," "Medium Price," and "High Price" to analyze the distribution of products across different price ranges.
+A dataset with product prices can be discretized into categories like 'Low Price', 'Medium Price', and 'High Price' to analyze the distribution of products across different price ranges.
 
 ## Conclusion:
 By mastering these data transformation techniques, data professionals can ensure data quality, consistency, and accuracy, and unleash the full potential of their datasets for data-driven success in their organizations.

@@ -35,5 +35,5 @@ Talend provides automation features that allow you to schedule your ETL jobs to 
     ![Screenshot](./assets/drugs_java.png)
 
 ### Tutorial 3 - rest, json
-- Goal:  Use this url "https://restcountries.com/v3/all" to get list of all the countries in the world and extract Common nam, Official name, population, continents
+- Goal:  Use this url "https://restcountries.com/v3/all" to get list of all the countries in the world and extract Common name, Official name, population, continents
     ![Screenshot](./assets/countries_rest_json.png)

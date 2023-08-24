@@ -20,8 +20,20 @@ Once data extraction and transformation are complete, the final step is loading 
 ### Scheduling and Automation
 Talend provides automation features that allow you to schedule your ETL jobs to run at specific intervals. The built-in scheduler ensures that your data pipelines are executed at the right time, reducing manual intervention and ensuring data accuracy.
 
-## Conclusion:
+## Tutorials:
+### Tutorial 1 - extract, map, load etc
+- Files 
+    - [movies.csv](./assets/movies.csv)  ';' delimited
+    - [directors.txt](./assets/directors.txt) ',' delimited
+- Goal: Use these files to get list of directors with number of movies made in descending order of count, output to console as well as to a file    
+    ![Screenshot](./assets/movies_maps_etc.png)
 
-Talend is a versatile ETL tool that empowers organizations to harness the power of data through efficient integration, transformation, and loading processes. Its user-friendly interface, rich component library, and powerful data connectors make it a popular choice for data engineers, analysts, and business users alike.
+### Tutorial 2 - java
+- Files 
+    - [drugs.csv](./assets/drugs.csv)  ';' delimited
+- Goal: Use this file to get list of drugs and use tJavaRow, tJavaFlex to calculate DaysToExpire and RemainingStock and filter only the expired one. 
+    ![Screenshot](./assets/drugs_java.png)
 
-In this tutorial, we covered the essential steps of using Talend, from installation and data extraction to transformation and loading. By following these steps, you can kickstart your data integration journey with Talend and unleash the potential of your data for driving better business decisions and gaining a competitive edge in today's data-centric landscape.
+### Tutorial 3 - rest, json
+- Goal:  Use this url "https://restcountries.com/v3/all" to get list of all the countries in the world and extract Common nam, Official name, population, continents
+    ![Screenshot](./assets/countries_rest_json.png)

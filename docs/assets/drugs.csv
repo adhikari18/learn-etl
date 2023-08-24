@@ -1,0 +1,6 @@
+DrugID,DrugName,ActiveIngredient,DosageForm,ManufacturingDate,ExpiryDate,Manufacturer,QuantityReceived,QuantityUsed
+1,Paracetamol,Acetaminophen,Tablet,2023-07-01,2023-07-23,PharmaCorp,100,50
+2,Aspirin,Acetylsalicylic Acid,Tablet,2023-06-15,2024-06-15,HealthMeds,200,10
+3,Ibuprofen,Ibuprofen,Capsule,2023-07-10,2024-07-10,MediCare,10,10
+4,Loratadine,Loratadine,Syrup,2023-07-05,2024-07-05,PharmaCorp,50,0
+5,Amoxicillin,Amoxicillin,Capsule,2023-06-20,2024-06-20,PharmaMeds,1000,999

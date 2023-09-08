@@ -1,6 +1,6 @@
 # Home
 ## Guide
-Becoming an ETL (Extract, Transform, Load) developer involves a series of steps. Here's a step-by-step guide to help you get started:
+Learning and mastering an ETL (Extract, Transform, Load) development involves continuous learning. Here are some guiding steps:
 
 1. Understand the Basics: Begin by grasping the fundamental concepts of ETL processes, data integration, and data warehousing. Familiarize yourself with databases, SQL, and data manipulation techniques.
  <br />
@@ -13,6 +13,7 @@ Becoming an ETL (Extract, Transform, Load) developer involves a series of steps.
  <br />
  [Redshift Overview](redshift.md)
 
+
 3. Learn ETL Tools: Explore popular ETL tools like Informatica PowerCenter, AWS Glue, Talend, SSIS (SQL Server Integration Services), or Apache NiFi. These tools simplify the ETL process and offer features for data extraction, transformation, and loading.
  <br /> 
  [Talend Overview](talend.md)
@@ -20,6 +21,7 @@ Becoming an ETL (Extract, Transform, Load) developer involves a series of steps.
  [AWS Glue](aws-glue.md) 
  <br />
  [Scheduler](scheduling.md)
+
 
 4. Getting familiarization with these tools and technologies will be very helpful
 	- Programming Skills: Learn a programming language commonly used in ETL development, such as Python or Java. 
@@ -30,10 +32,12 @@ Becoming an ETL (Extract, Transform, Load) developer involves a series of steps.
 	- UNIX commands: These can significantly enhance your efficiency and effectiveness. 
 	<br /> [Unix commands](unix-commands.md)
 
+
 5. Understand Data Modeling: Familiarize yourself with data modeling concepts, including entity-relationship diagrams (ERDs) and dimensional modeling. This knowledge will help you design efficient data structures for ETL processes.
 <br />
 [Data Modeling Overview](data-modeling.md)
 <br />
+
 
 7. Enhance Performance and Scalability: Explore techniques for optimizing ETL processes, such as parallel processing, partitioning, indexing, and incremental data loading. Understand how to handle large volumes of data efficiently.
 <br />

@@ -39,10 +39,12 @@ Learning and mastering an ETL (Extract, Transform, Load) development involves co
 <br />
 
 
-7. Enhance Performance and Scalability: Explore techniques for optimizing ETL processes, such as parallel processing, partitioning, indexing, and incremental data loading. Understand how to handle large volumes of data efficiently.
+6. Enhance Performance and Scalability: Explore techniques for optimizing ETL processes, such as parallel processing, partitioning, indexing, and incremental data loading. Understand how to handle large volumes of data efficiently.
 <br />
 [Optimization](etl-optimization.md)
 <br />
+[Unit Testing](unit-test.md)
+
 
 
 ## Table of Contents

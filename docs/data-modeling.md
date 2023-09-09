@@ -10,7 +10,7 @@ Dimensional Modeling is a data modeling technique used in data warehousing to cr
 
 ### Dimension Tables 
 Dimension tables contain descriptive attributes and are used for slicing and dicing data in analytical queries.
-#### Example:
+<b> Example: </b>
 In a retail data warehouse, a "Product Dimension" table may include attributes like product name, category, brand, and price.
 
 | Product_ID | Product_Name | Category| Price |
@@ -22,7 +22,7 @@ In a retail data warehouse, a "Product Dimension" table may include attributes l
 
 ### Fact tables
 Fact tables contain numerical measures and are used to store aggregated data, such as sales, quantities, or revenue.
-#### Example:
+<b> Example: </b>
 A "Sales Fact" table in the retail data warehouse may include measures like quantity sold, revenue, and discount.
 
 | Product_ID |  Date   | Quantity | Revenue|Discount|
@@ -36,7 +36,7 @@ Dimensional modeling simplifies and speeds up analytical queries, making it idea
 
 ## Entity-Relationship Diagrams (ERDs):
 Entity-Relationship Diagrams (ERDs) are visual representations that illustrate the relationships between entities in a database. Entities represent real-world objects or concepts, and relationships depict how these entities are connected.
-### Example:
+<b> Example: </b>
 Consider a database for a retail store. Entities in this database may include "Customer," "Product," and "Order." The ERD will show the relationships between these entities, such as "Customer" placing "Order" and "Order" containing "Product."
 ````
       +--------------+
@@ -58,7 +58,7 @@ In Entity-Relationship Diagrams (ERDs), different shapes are used to represent e
 
 #### Entity Shape:
 The entity shape represents a real-world object or concept, typically corresponding to a database table. It is depicted as a rectangle with rounded corners and labeled with the entity name.
-##### Example:
+<b> Example: </b>
 Consider a simple ERD for a library database. The "Book" entity can be represented as follows:
 ````
 +------------+
@@ -73,7 +73,7 @@ Consider a simple ERD for a library database. The "Book" entity can be represent
 
 #### Attribute Shape:
 The attribute shape represents the properties or characteristics of an entity. It is depicted as an oval and connected to the corresponding entity using lines.
-##### Example:
+<b> Example: </b>
 In the "Book" entity, attributes like "Book_ID," "Title," "Author," and "ISBN" are represented as attributes:
 ````
 +------------+
@@ -88,7 +88,7 @@ In the "Book" entity, attributes like "Book_ID," "Title," "Author," and "ISBN" a
 
 #### Relationship Shape:
 The relationship shape represents the association between two or more entities. It is depicted as a diamond shape and labeled with the type of relationship (e.g., one-to-one, one-to-many, many-to-many).
-##### Example:
+<b> Example: </b>
 In the library database ERD, we can have a "Borrow" relationship between the "Customer" and "Book" entities, indicating that a customer can borrow multiple books:
 ````
 +------------+         +---------------+        +--------------+
@@ -98,8 +98,7 @@ In the library database ERD, we can have a "Borrow" relationship between the "Cu
 
 #### Cardinality Notation:
 Cardinality notation is used in ERDs to specify the number of instances of one entity that can be related to the other entity. The cardinality is represented near the ends of the relationship lines.
-
-##### Example:
+<b> Example: </b>
 In the "Borrow" relationship between "Customer" and "Book," the cardinality notation can indicate that one customer can borrow multiple books:
 ````
 +------------+     1      +---------------+       N      +--------------+
@@ -109,7 +108,7 @@ In the "Borrow" relationship between "Customer" and "Book," the cardinality nota
 
 #### Weak Entity Shape:
 A weak entity is an entity that depends on another entity for its existence and cannot be uniquely identified without the parent entity. Weak entities are depicted with a double rectangle.
-##### Example:
+<b> Example: </b>
 In a university database, the "Course" entity might have a weak entity "Section," which depends on the "Course" entity for its identification:
 ````
 +------------+          +--------------+

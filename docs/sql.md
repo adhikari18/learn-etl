@@ -79,7 +79,7 @@ WITH revenue_cte AS (
 SELECT product_category, total_revenue, total_revenue * 0.1 AS tax_amount
 FROM revenue_cte;
 ~~~~
-#### Benefits:
+<b> Benefits: </b>
 
 - Improves query readability by breaking down complex logic into smaller, manageable parts.
 - Enhances code maintainability by allowing developers to reuse CTEs across multiple queries.
@@ -92,7 +92,7 @@ SELECT order_id, order_date, order_amount
 FROM orders
 WHERE order_amount > (SELECT AVG(order_amount) FROM orders);
 ~~~~
-#### Benefits:
+<b> Benefits: </b>
 - Provides a concise and straightforward way to filter data based on complex conditions or aggregate functions.
 - Enables you to retrieve data from related tables using subqueries in joins, improving data integration.
 
@@ -109,7 +109,7 @@ SELECT product_id, total_quantity
 FROM temp_sales
 WHERE total_quantity > 1000;
 ~~~~
-#### Benefits:
+<b> Benefits: </b>
 
 Reduces complexity in the main query by breaking down data transformation steps into separate temporary tables.
 Improves query performance by reducing the need for complex joins and calculations in a single query.

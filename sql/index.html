@@ -1,0 +1,1011 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://adhikari18.github.io/etl-101/sql/">
+      
+      
+        <link rel="prev" href="../etl-optimization/">
+      
+      
+        <link rel="next" href="../data-modeling/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.2.8">
+    
+    
+      
+        <title>SQL - ETL 101</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.046329b4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.85d0ee34.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="purple">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sql" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="ETL 101" class="md-header__button md-logo" aria-label="ETL 101" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ETL 101
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              SQL
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="lime"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../oltp-vs-olap/" class="md-tabs__link">
+        
+  
+    
+  
+  ETL
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../etl-optimization/" class="md-tabs__link">
+        
+  
+    
+  
+  Optimization
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+    
+  
+  SQL
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../data-modeling/" class="md-tabs__link">
+        
+  
+    
+  
+  Modeling
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../scheduling/" class="md-tabs__link">
+        
+  
+    
+  
+  Scheduling
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../talend/" class="md-tabs__link">
+        
+  
+    
+  
+  Talend
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../unit-test/" class="md-tabs__link">
+        
+  
+    
+  
+  Unit Test
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../job-scenarios-pharma/" class="md-tabs__link">
+        
+  
+    
+  
+  Best Practice
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../aws-glue/" class="md-tabs__link">
+        
+  
+    
+  
+  AWS Glue
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../redshift/" class="md-tabs__link">
+        
+  
+    
+  
+  Redshift
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../git/" class="md-tabs__link">
+        
+  
+    
+  
+  Git
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../unix-commands/" class="md-tabs__link">
+        
+  
+    
+  
+  Unix
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="ETL 101" class="md-nav__button md-logo" aria-label="ETL 101" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    ETL 101
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oltp-vs-olap/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ETL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../etl-optimization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Optimization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    SQL
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    SQL
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#useful-commands" class="md-nav__link">
+    Useful commands
+  </a>
+  
+    <nav class="md-nav" aria-label="Useful commands">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#select-extracting-data" class="md-nav__link">
+    SELECT - Extracting Data:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#join-combining-data" class="md-nav__link">
+    JOIN - Combining Data:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#group-by-aggregating-data" class="md-nav__link">
+    GROUP BY - Aggregating Data:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#case-conditional-transformation" class="md-nav__link">
+    CASE - Conditional Transformation:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#insert-loading-data" class="md-nav__link">
+    INSERT - Loading Data:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-modifying-data" class="md-nav__link">
+    UPDATE - Modifying Data:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-removing-data" class="md-nav__link">
+    DELETE - Removing Data:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#common-table-expressions-ctes" class="md-nav__link">
+    Common Table Expressions (CTEs):
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subqueries" class="md-nav__link">
+    Subqueries:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#temporary-tables" class="md-nav__link">
+    Temporary Tables:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    Conclusion:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cheatsheet" class="md-nav__link">
+    Cheatsheet
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-modeling/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Modeling
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scheduling/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Scheduling
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../talend/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Talend
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unit-test/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Unit Test
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../job-scenarios-pharma/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Best Practice
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aws-glue/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AWS Glue
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../redshift/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Redshift
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../git/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Git
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unix-commands/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Unix
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="sql">SQL</h1>
+<p>Leveraging the Power of SQL: Essential Commands for ETL Processes</p>
+<h2 id="introduction">Introduction:</h2>
+<p>In data engineering and ETL processes, SQL (Structured Query Language) commands play a pivotal role in manipulating and transforming data. SQL offers a versatile set of commands that enable data engineers to extract data from various sources, apply transformations, and load it into target destinations. In this article, we will explore some of the most useful SQL commands for ETL processes, highlighting their applications and benefits.</p>
+<h2 id="useful-commands">Useful commands</h2>
+<h3 id="select-extracting-data">SELECT - Extracting Data:</h3>
+<p>The foundational SQL command "SELECT" is used to extract data from one or more tables. It allows you to specify the columns you want to retrieve, apply filters using the "WHERE" clause, and sort data using "ORDER BY."</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>SELECT customer_id, order_date, order_amount
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>FROM orders
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>WHERE order_date &gt;= &#39;2023-01-01&#39;
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>ORDER BY order_amount DESC;
+</code></pre></div>
+<h3 id="join-combining-data">JOIN - Combining Data:</h3>
+<p>The "JOIN" command allows you to combine data from multiple tables based on related columns. Joins are crucial for integrating data from various sources during the ETL process.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>SELECT orders.order_id, customers.customer_name, orders.order_date
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>FROM orders
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>JOIN customers ON orders.customer_id = customers.customer_id;
+</code></pre></div>
+<h3 id="group-by-aggregating-data">GROUP BY - Aggregating Data:</h3>
+<p>The "GROUP BY" command is used to group rows based on specific columns and apply aggregate functions like SUM, AVG, COUNT, etc. It is instrumental in summarizing data during the transformation phase of ETL.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>SELECT product_category, SUM(sales_amount) AS total_sales
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>FROM sales
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>GROUP BY product_category;
+</code></pre></div>
+<h3 id="case-conditional-transformation">CASE - Conditional Transformation:</h3>
+<p>The "CASE" statement allows you to apply conditional logic and perform transformations based on specific conditions. It is useful for handling data discrepancies or applying custom business rules during data transformation.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>SELECT order_id, order_date,
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>  CASE
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    WHEN order_amount &gt; 1000 THEN &#39;High Value&#39;
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    WHEN order_amount &gt; 500 THEN &#39;Medium Value&#39;
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    ELSE &#39;Low Value&#39;
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>  END AS order_category
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>FROM orders;
+</code></pre></div>
+<h3 id="insert-loading-data">INSERT - Loading Data:</h3>
+<p>The "INSERT" command is used to load data into a target table from other tables, temporary tables, or external data sources. It is a fundamental SQL command for the "Load" phase of ETL.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>INSERT INTO target_table (column1, column2, column3)
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>SELECT column1, column2, column3
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>FROM source_table
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>WHERE condition;
+</code></pre></div></p>
+<h3 id="update-modifying-data">UPDATE - Modifying Data:</h3>
+<p>The "UPDATE" command allows you to modify existing data in a table based on specified conditions. It is useful when updating records during the ETL process.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>UPDATE customers
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>SET customer_status = &#39;Active&#39;
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>WHERE last_purchase_date &gt;= &#39;2023-01-01&#39;;
+</code></pre></div></p>
+<h3 id="delete-removing-data">DELETE - Removing Data:</h3>
+<p>The "DELETE" command is used to remove specific rows from a table based on specified conditions. It is essential for data cleanup and maintenance during ETL.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>DELETE FROM customers
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>WHERE customer_status = &#39;Inactive&#39;;
+</code></pre></div></p>
+<h3 id="common-table-expressions-ctes">Common Table Expressions (CTEs):</h3>
+<p>Common Table Expressions, commonly known as CTEs, are temporary result sets that allow you to create complex, reusable, and more readable SQL queries. CTEs are defined using the "WITH" clause and can reference themselves or other CTEs within the same query.</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>WITH revenue_cte AS (
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>  SELECT product_category, SUM(sales_amount) AS total_revenue
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>  FROM sales
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>  GROUP BY product_category
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>)
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>SELECT product_category, total_revenue, total_revenue * 0.1 AS tax_amount
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>FROM revenue_cte;
+</code></pre></div>
+<b> Benefits: </b></p>
+<ul>
+<li>Improves query readability by breaking down complex logic into smaller, manageable parts.</li>
+<li>Enhances code maintainability by allowing developers to reuse CTEs across multiple queries.</li>
+<li>Optimizes query performance by enabling the database optimizer to treat CTEs as materialized subqueries.</li>
+</ul>
+<h3 id="subqueries">Subqueries:</h3>
+<p>Subqueries, also known as nested queries, are queries embedded within another query. They enable you to perform operations on a subset of data or retrieve data from related tables.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>SELECT order_id, order_date, order_amount
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>FROM orders
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>WHERE order_amount &gt; (SELECT AVG(order_amount) FROM orders);
+</code></pre></div>
+<b> Benefits: </b>
+- Provides a concise and straightforward way to filter data based on complex conditions or aggregate functions.
+- Enables you to retrieve data from related tables using subqueries in joins, improving data integration.</p>
+<h3 id="temporary-tables">Temporary Tables:</h3>
+<p>Temporary Tables are tables that exist temporarily for the duration of a session or a specific query. They are useful for storing intermediate results during complex data transformations.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>CREATE TEMPORARY TABLE temp_sales AS (
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>  SELECT product_id, SUM(quantity) AS total_quantity
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>  FROM sales
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>  GROUP BY product_id
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>);
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>SELECT product_id, total_quantity
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>FROM temp_sales
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>WHERE total_quantity &gt; 1000;
+</code></pre></div>
+<b> Benefits: </b></p>
+<p>Reduces complexity in the main query by breaking down data transformation steps into separate temporary tables.
+Improves query performance by reducing the need for complex joins and calculations in a single query.</p>
+<h2 id="conclusion">Conclusion:</h2>
+<p>SQL commands are indispensable tools for data engineers and analysts involved in ETL processes. From data extraction and transformation to loading and maintenance, SQL empowers users to handle diverse data scenarios efficiently. By mastering these essential SQL commands, data professionals can streamline their ETL workflows, ensure data accuracy, and gain valuable insights to drive informed decision-making.</p>
+<p>As SQL continues to be a primary language for data manipulation, exploring its advanced features and applying best practices will enable data teams to unlock the full potential of their data, making a significant impact on their organization's success.</p>
+<h2 id="cheatsheet">Cheatsheet</h2>
+<p><a href="https://learnsql.com/blog/sql-basics-cheat-sheet/sql-basics-cheat-sheet-a3.pdf">SQL basics cheatsheet</a></p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.sections", "toc.integrate", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.dff1b7c8.min.js"></script>
+      
+    
+  </body>
+</html>

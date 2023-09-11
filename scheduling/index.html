@@ -1,0 +1,1109 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://adhikari18.github.io/etl-101/scheduling/">
+      
+      
+        <link rel="prev" href="../data-modeling/">
+      
+      
+        <link rel="next" href="../talend/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.2.8">
+    
+    
+      
+        <title>Scheduling - ETL 101</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.046329b4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.85d0ee34.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="purple">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#scheduling" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="ETL 101" class="md-header__button md-logo" aria-label="ETL 101" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ETL 101
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Scheduling
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="lime"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../oltp-vs-olap/" class="md-tabs__link">
+        
+  
+    
+  
+  ETL
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../etl-optimization/" class="md-tabs__link">
+        
+  
+    
+  
+  Optimization
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../sql/" class="md-tabs__link">
+        
+  
+    
+  
+  SQL
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../data-modeling/" class="md-tabs__link">
+        
+  
+    
+  
+  Modeling
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+    
+  
+  Scheduling
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../talend/" class="md-tabs__link">
+        
+  
+    
+  
+  Talend
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../unit-test/" class="md-tabs__link">
+        
+  
+    
+  
+  Unit Test
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../job-scenarios-pharma/" class="md-tabs__link">
+        
+  
+    
+  
+  Best Practice
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../aws-glue/" class="md-tabs__link">
+        
+  
+    
+  
+  AWS Glue
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../redshift/" class="md-tabs__link">
+        
+  
+    
+  
+  Redshift
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../git/" class="md-tabs__link">
+        
+  
+    
+  
+  Git
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../unix-commands/" class="md-tabs__link">
+        
+  
+    
+  
+  Unix
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="ETL 101" class="md-nav__button md-logo" aria-label="ETL 101" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    ETL 101
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oltp-vs-olap/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ETL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../etl-optimization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Optimization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sql/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SQL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-modeling/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Modeling
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Scheduling
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Scheduling
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction:
+  </a>
+  
+    <nav class="md-nav" aria-label="Introduction:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#talend-scheduler" class="md-nav__link">
+    Talend Scheduler
+  </a>
+  
+    <nav class="md-nav" aria-label="Talend Scheduler">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#steps" class="md-nav__link">
+    Steps:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-autosys" class="md-nav__link">
+    2. AutoSys
+  </a>
+  
+    <nav class="md-nav" aria-label="2. AutoSys">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to" class="md-nav__link">
+    How to?
+  </a>
+  
+    <nav class="md-nav" aria-label="How to?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install" class="md-nav__link">
+    Install:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure" class="md-nav__link">
+    Configure:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jobs" class="md-nav__link">
+    Jobs
+  </a>
+  
+    <nav class="md-nav" aria-label="Jobs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-definitions" class="md-nav__link">
+    Create Definitions:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#define-dependencies" class="md-nav__link">
+    Define Dependencies:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#schedule" class="md-nav__link">
+    Schedule:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitor-execution" class="md-nav__link">
+    Monitor Execution:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3control-m" class="md-nav__link">
+    3.Control-M
+  </a>
+  
+    <nav class="md-nav" aria-label="3.Control-M">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to_1" class="md-nav__link">
+    How to?
+  </a>
+  
+    <nav class="md-nav" aria-label="How to?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-control-m" class="md-nav__link">
+    Install Control-M:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-control-m" class="md-nav__link">
+    Configure Control-M:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-control-m-jobs" class="md-nav__link">
+    Create Control-M Jobs:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#define-job-schedules" class="md-nav__link">
+    Define Job Schedules:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-up-job-monitoring-and-alerting" class="md-nav__link">
+    Set Up Job Monitoring and Alerting:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manage-workflows-and-dependencies" class="md-nav__link">
+    Manage Workflows and Dependencies:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integrate-with-etl-tools-and-platforms" class="md-nav__link">
+    Integrate with ETL Tools and Platforms:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#automate-and-optimize" class="md-nav__link">
+    Automate and Optimize:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    Conclusion:
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../talend/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Talend
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unit-test/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Unit Test
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../job-scenarios-pharma/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Best Practice
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aws-glue/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AWS Glue
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../redshift/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Redshift
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../git/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Git
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unix-commands/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Unix
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="scheduling">Scheduling</h1>
+<p>Job Scheduling and Workload Automation Tools for ETL</p>
+<h2 id="introduction">Introduction:</h2>
+<p>Efficient job scheduling is a critical aspect of managing complex data workflows and automating repetitive tasks. AutoSys, a robust job scheduling tool, empowers organizations to streamline job automation, improve resource utilization, and ensure timely execution of critical processes. In this article, we will explore the fundamentals of starting with job scheduling using the AutoSys job scheduler, from installation and setup to creating and managing jobs.</p>
+<p>Here are some options</p>
+<h3 id="talend-scheduler">Talend Scheduler</h3>
+<p>Getting Started with Talend's Built-In Scheduler</p>
+<h4 id="steps">Steps:</h4>
+<div class="highlight"><pre><span></span><code>- Step 1: Create Your Talend Job
+   Before scheduling a job, you need to have a Talend job ready. If you haven&#39;t created one yet, use Talend Studio to design your data integration job. Make sure it&#39;s fully tested and functioning as expected.
+
+- Step 2: Configure the Talend Scheduler
+    i. Open your Talend job in Talend Studio.
+    ii. In the Job Conductor, navigate to the &quot;Scheduling&quot; tab.
+    iii. Click the &quot;Add&quot; button to create a new job scheduler.
+
+- Step 3: Define Scheduling Parameters
+    Talend&#39;s scheduler offers a range of scheduling options:
+
+    i. Frequency: Choose how often you want the job to run (e.g., daily, weekly, monthly).
+    ii. Start Time: Specify when the job should start.
+    iii. End Time: Optionally, set an end time for the job to prevent it from running indefinitely.
+    iv. Execution Server: Select the execution server where the job will run. Ensure that you have set up execution servers in advance.
+    v. Contexts: If your job uses contexts, specify the context to use during scheduling.
+
+- Step 4: Configure Advanced Options
+   Talend&#39;s scheduler provides advanced options to fine-tune job execution:
+
+    i. Dependencies: Set dependencies to ensure that jobs run in a specific order.
+    ii. Alerts: Configure email notifications for job success or failure.
+    iii. Retries: Define the number of times the job should retry execution in case of failure.
+
+- Step 5: Save and Deploy
+After configuring the scheduler, save the settings, and deploy your job. Talend will generate deployment artifacts that can be executed by the scheduler on the specified server.
+
+- Step 6: Monitor and Manage Scheduled Jobs
+Once your job is scheduled, you can monitor its execution and manage schedules in the Talend Administration Center. Here, you can view job logs, check execution history, and make adjustments as needed.
+</code></pre></div>
+<h3 id="2-autosys">2. AutoSys</h3>
+<p>AutoSys is an enterprise-grade job scheduling and workload automation tool that enables users to define, schedule, and monitor jobs across various platforms and applications. It offers a user-friendly interface, making it accessible to both technical and non-technical users.</p>
+<h4 id="how-to">How to?</h4>
+<h5 id="install">Install:</h5>
+<p>Before getting started, you need to install AutoSys on your designated server or machine. The installation process may vary depending on the operating system and the version of AutoSys you are using. Refer to the AutoSys documentation for detailed installation instructions.</p>
+<h5 id="configure">Configure:</h5>
+<p>Once AutoSys is installed, you'll need to configure it to align with your organization's infrastructure and requirements. Configuration involves setting up user accounts, defining permissions, and configuring connection details for various systems.</p>
+<h5 id="jobs">Jobs</h5>
+<h6 id="create-definitions">Create Definitions:</h6>
+<p>In AutoSys, job definitions are the heart of job scheduling. To create a job definition, you need to specify the job type (e.g., command job, file watcher job, box job), the command or script to execute, and any required input parameters or conditions.</p>
+<p>Example of a simple command job</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nx">insert_job</span><span class="o">:</span><span class="w"> </span><span class="nx">my_command_job</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nx">job_type</span><span class="o">:</span><span class="w"> </span><span class="nx">c</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nx">command</span><span class="o">:</span><span class="w"> </span><span class="err">/path/to/script.sh</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="nx">machine</span><span class="o">:</span><span class="w"> </span><span class="nx">my_server</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nx">owner</span><span class="o">:</span><span class="w"> </span><span class="nx">my_user</span>
+</code></pre></div>
+<h6 id="define-dependencies">Define Dependencies:</h6>
+<p>AutoSys allows you to define dependencies between jobs, ensuring that jobs are executed in the correct order. You can specify conditions based on job status, success, or failure, as well as time constraints for job execution.</p>
+<p>Example of a job with a dependency</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nx">insert_job</span><span class="o">:</span><span class="w"> </span><span class="nx">my_job_2</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nx">job_type</span><span class="o">:</span><span class="w"> </span><span class="nx">c</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nx">command</span><span class="o">:</span><span class="w"> </span><span class="err">/path/to/another_script.sh</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nx">machine</span><span class="o">:</span><span class="w"> </span><span class="nx">my_server</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="nx">condition</span><span class="o">:</span><span class="w"> </span><span class="nx">success</span><span class="p">(</span><span class="nx">my_command_job</span><span class="p">)</span>
+</code></pre></div>
+<h6 id="schedule">Schedule:</h6>
+<p>AutoSys offers various scheduling options, allowing you to define when and how often jobs should run. You can schedule jobs to run at specific times, on specific days of the week, or based on calendar events.</p>
+<p>Example of a job with a schedule:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nx">insert_job</span><span class="o">:</span><span class="w"> </span><span class="nx">my_scheduled_job</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nx">job_type</span><span class="o">:</span><span class="w"> </span><span class="nx">c</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nx">command</span><span class="o">:</span><span class="w"> </span><span class="err">/path/to/scheduled_script.sh</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="nx">machine</span><span class="o">:</span><span class="w"> </span><span class="nx">my_server</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="nx">start_times</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;2023-07-30 09:00, 2023-07-31 15:00&quot;</span>
+</code></pre></div>
+<h6 id="monitor-execution">Monitor Execution:</h6>
+<p>AutoSys provides a monitoring interface that allows you to track the status of your jobs in real-time. You can view job logs, monitor job dependencies, and get notifications for job status changes.</p>
+<h3 id="3control-m">3.Control-M</h3>
+<p>Control-M, a popular workload automation tool, empowers organizations to manage and schedule ETL jobs with ease and precision. In this article, we will explore the fundamentals of getting started with Control-M for ETL job scheduling, from installation and configuration to job setup and monitoring.</p>
+<h4 id="how-to_1">How to?</h4>
+<h5 id="install-control-m">Install Control-M:</h5>
+<p>The first step in getting started with Control-M is installing the software on your designated server. Control-M supports various platforms, including Windows, Linux, and UNIX. Once installed, you can access the Control-M User Interface (UI) through a web browser.</p>
+<h5 id="configure-control-m">Configure Control-M:</h5>
+<p>After installation, you'll need to configure Control-M to align with your ETL environment. This involves setting up user accounts, defining permissions, and configuring integration with your data sources and targets.</p>
+<h5 id="create-control-m-jobs">Create Control-M Jobs:</h5>
+<p>Control-M jobs are at the heart of ETL scheduling. To create a job, specify the type of task (e.g., shell script, SQL query, data transformation), the required inputs, and the output destinations. You can also define job dependencies and conditions to ensure smooth workflow execution.</p>
+<h5 id="define-job-schedules">Define Job Schedules:</h5>
+<p>Control-M offers various scheduling options to accommodate the needs of your ETL processes. You can schedule jobs to run at specific times, periodically, or based on predefined events or triggers. Control-M also supports calendar-based scheduling, allowing you to manage job execution during holidays or specific business hours.</p>
+<h5 id="set-up-job-monitoring-and-alerting">Set Up Job Monitoring and Alerting:</h5>
+<p>Monitoring job execution is crucial for ensuring the success of your ETL processes. Control-M provides detailed job logs and real-time monitoring dashboards to track the progress and status of each job. You can also configure email notifications or alerts to be notified of any issues or failures.</p>
+<h5 id="manage-workflows-and-dependencies">Manage Workflows and Dependencies:</h5>
+<p>In complex ETL workflows, jobs often depend on each other for data continuity. Control-M enables you to define dependencies between jobs, ensuring that each task is executed in the correct order. You can also set up job conditions to control the flow of the workflow based on specific outcomes.</p>
+<h5 id="integrate-with-etl-tools-and-platforms">Integrate with ETL Tools and Platforms:</h5>
+<p>Control-M offers seamless integration with various ETL tools and platforms, including Informatica, Talend, Microsoft SSIS, and more. This integration allows you to leverage the capabilities of your preferred ETL tool while benefiting from Control-M's advanced job scheduling and monitoring features.</p>
+<h5 id="automate-and-optimize">Automate and Optimize:</h5>
+<p>Control-M is designed for automation and optimization, allowing you to save time and effort in managing your ETL jobs. You can create job templates, apply bulk changes, and set up automatic retries or recovery actions in case of job failures.</p>
+<h2 id="conclusion">Conclusion:</h2>
+<p>Based on your need you could pick a scheduler.</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.sections", "toc.integrate", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.dff1b7c8.min.js"></script>
+      
+    
+  </body>
+</html>

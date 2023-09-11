@@ -1,0 +1,1382 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://adhikari18.github.io/etl-101/unix-commands/">
+      
+      
+        <link rel="prev" href="../git/">
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.2.8">
+    
+    
+      
+        <title>Unix - ETL 101</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.046329b4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.85d0ee34.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="purple">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#unix" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="ETL 101" class="md-header__button md-logo" aria-label="ETL 101" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ETL 101
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Unix
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="lime"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../oltp-vs-olap/" class="md-tabs__link">
+        
+  
+    
+  
+  ETL
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../etl-optimization/" class="md-tabs__link">
+        
+  
+    
+  
+  Optimization
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../sql/" class="md-tabs__link">
+        
+  
+    
+  
+  SQL
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../data-modeling/" class="md-tabs__link">
+        
+  
+    
+  
+  Modeling
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../scheduling/" class="md-tabs__link">
+        
+  
+    
+  
+  Scheduling
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../talend/" class="md-tabs__link">
+        
+  
+    
+  
+  Talend
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../unit-test/" class="md-tabs__link">
+        
+  
+    
+  
+  Unit Test
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../job-scenarios-pharma/" class="md-tabs__link">
+        
+  
+    
+  
+  Best Practice
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../aws-glue/" class="md-tabs__link">
+        
+  
+    
+  
+  AWS Glue
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../redshift/" class="md-tabs__link">
+        
+  
+    
+  
+  Redshift
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../git/" class="md-tabs__link">
+        
+  
+    
+  
+  Git
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+    
+  
+  Unix
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="ETL 101" class="md-nav__button md-logo" aria-label="ETL 101" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    ETL 101
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oltp-vs-olap/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ETL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../etl-optimization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Optimization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sql/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SQL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-modeling/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Modeling
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scheduling/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Scheduling
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../talend/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Talend
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unit-test/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Unit Test
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../job-scenarios-pharma/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Best Practice
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aws-glue/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AWS Glue
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../redshift/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Redshift
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../git/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Git
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Unix
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Unix
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#commands" class="md-nav__link">
+    Commands
+  </a>
+  
+    <nav class="md-nav" aria-label="Commands">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#navigating-file-system" class="md-nav__link">
+    Navigating File System
+  </a>
+  
+    <nav class="md-nav" aria-label="Navigating File System">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pwd-print-the-current-working-directory" class="md-nav__link">
+    pwd - Print the current working directory
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ls-list-files-and-directories" class="md-nav__link">
+    ls - List files and directories
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cd-change-directory" class="md-nav__link">
+    cd - change directory
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-manipulation" class="md-nav__link">
+    File Manipulation
+  </a>
+  
+    <nav class="md-nav" aria-label="File Manipulation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cp-copy-files-or-directories" class="md-nav__link">
+    cp - copy files or directories
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mv-move-or-rename-files" class="md-nav__link">
+    mv - Move or rename files:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rm-remove-files-or-directories" class="md-nav__link">
+    rm - Remove files or directories:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-viewing-and-text-manipulation" class="md-nav__link">
+    File Viewing and Text Manipulation
+  </a>
+  
+    <nav class="md-nav" aria-label="File Viewing and Text Manipulation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cat-display-file-content" class="md-nav__link">
+    cat - Display file content:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#less-display-file-content-page-by-page" class="md-nav__link">
+    less - Display file content page by page:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#grep-search-for-a-specific-string-in-files" class="md-nav__link">
+    grep - Search for a specific string in files:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-transformation" class="md-nav__link">
+    Data Transformation
+  </a>
+  
+    <nav class="md-nav" aria-label="Data Transformation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cut-extract-specific-columns-from-a-file" class="md-nav__link">
+    cut - Extract specific columns from a file:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#awk-powerful-text-processing-tool" class="md-nav__link">
+    awk - Powerful text processing tool:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sed-stream-editor-for-text-manipulation" class="md-nav__link">
+    sed - Stream editor for text manipulation:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-filtering" class="md-nav__link">
+    Data Filtering
+  </a>
+  
+    <nav class="md-nav" aria-label="Data Filtering">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sort-sort-lines-in-a-file" class="md-nav__link">
+    sort - Sort lines in a file:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uniq-filter-out-duplicate-lines" class="md-nav__link">
+    uniq - Filter out duplicate lines:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#head-and-tail-display-the-first-or-last-few-lines-of-a-file" class="md-nav__link">
+    head and tail - Display the first or last few lines of a file:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-compression-and-decompression" class="md-nav__link">
+    File Compression and Decompression
+  </a>
+  
+    <nav class="md-nav" aria-label="File Compression and Decompression">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gzip-compress-files" class="md-nav__link">
+    gzip - Compress files:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gunzip-decompress-files" class="md-nav__link">
+    gunzip - Decompress files:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#running-scripts-and-executables" class="md-nav__link">
+    Running Scripts and Executables
+  </a>
+  
+    <nav class="md-nav" aria-label="Running Scripts and Executables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#chmod-change-file-permissions" class="md-nav__link">
+    chmod - Change file permissions:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-run-a-script-or-executable" class="md-nav__link">
+    ./ - Run a script or executable:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#redirection-and-pipes" class="md-nav__link">
+    Redirection and Pipes
+  </a>
+  
+    <nav class="md-nav" aria-label="Redirection and Pipes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#-redirect-output-to-a-file-overwrite" class="md-nav__link">
+    &gt; - Redirect output to a file (overwrite):
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-redirect-output-to-a-file-append" class="md-nav__link">
+    &gt;&gt; - Redirect output to a file (append):
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-pipe-operator-to-pass-output-from-one-command-as-input-to-another" class="md-nav__link">
+    | - Pipe operator to pass output from one command as input to another:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variables-and-environment" class="md-nav__link">
+    Variables and Environment
+  </a>
+  
+    <nav class="md-nav" aria-label="Variables and Environment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#export-set-environment-variables" class="md-nav__link">
+    export - Set environment variables:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variable-access-the-value-of-an-environment-variable" class="md-nav__link">
+    $VARIABLE - Access the value of an environment variable:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loops-and-control-structures" class="md-nav__link">
+    Loops and Control Structures
+  </a>
+  
+    <nav class="md-nav" aria-label="Loops and Control Structures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-loop-iterate-over-a-list-of-items" class="md-nav__link">
+    for loop - Iterate over a list of items:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#if-statement-conditional-execution" class="md-nav__link">
+    if statement - Conditional execution:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remote-file-operations-ssh" class="md-nav__link">
+    Remote File Operations (SSH)
+  </a>
+  
+    <nav class="md-nav" aria-label="Remote File Operations (SSH)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scp-securely-copy-files-between-local-and-remote-systems" class="md-nav__link">
+    scp - Securely copy files between local and remote systems:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ssh-securely-connect-to-a-remote-system" class="md-nav__link">
+    ssh - Securely connect to a remote system:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finding-and-managing-processes" class="md-nav__link">
+    Finding and Managing Processes
+  </a>
+  
+    <nav class="md-nav" aria-label="Finding and Managing Processes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ps-display-currently-running-processes" class="md-nav__link">
+    ps - Display currently running processes:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kill-terminate-a-process-by-its-process-id" class="md-nav__link">
+    kill - Terminate a process by its process ID:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cron-jobs-for-scheduled-tasks" class="md-nav__link">
+    Cron Jobs for Scheduled Tasks
+  </a>
+  
+    <nav class="md-nav" aria-label="Cron Jobs for Scheduled Tasks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#crontab-edit-user-specific-cron-jobs" class="md-nav__link">
+    crontab - Edit user-specific cron jobs:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitoring-disk-usage" class="md-nav__link">
+    Monitoring Disk Usage
+  </a>
+  
+    <nav class="md-nav" aria-label="Monitoring Disk Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#df-display-disk-space-usage" class="md-nav__link">
+    df - Display disk space usage:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#du-display-file-and-directory-disk-usage" class="md-nav__link">
+    du - Display file and directory disk usage:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cheat-sheet" class="md-nav__link">
+    Cheat sheet
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="unix">Unix</h1>
+<p>Mastering the ETL Process with Essential UNIX Commands: A Tutorial</p>
+<h2 id="introduction">Introduction:</h2>
+<p>UNIX commands have long been the backbone of data processing and manipulation in the ETL (Extract, Transform, Load) process. Whether you are working with large datasets or performing routine data tasks, understanding these commands can significantly enhance your efficiency and effectiveness. In this tutorial, we will explore several essential UNIX commands that are invaluable for data engineers and analysts involved in ETL processes.</p>
+<h2 id="commands">Commands</h2>
+<h3 id="navigating-file-system">Navigating File System</h3>
+<h4 id="pwd-print-the-current-working-directory">pwd - Print the current working directory</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">pwd</span>
+</code></pre></div>
+<h4 id="ls-list-files-and-directories">ls - List files and directories</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>ls
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>ls<span class="w"> </span>-l<span class="w">    </span><span class="c1"># Detailed list</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>ls<span class="w"> </span>-a<span class="w">    </span><span class="c1"># Show hidden files</span>
+</code></pre></div>
+<h4 id="cd-change-directory">cd - change directory</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">cd</span><span class="w"> </span>/path/to/directory
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nb">cd</span><span class="w"> </span>..<span class="w">    </span><span class="c1"># Move up one directory</span>
+</code></pre></div>
+<h3 id="file-manipulation">File Manipulation</h3>
+<h4 id="cp-copy-files-or-directories">cp - copy files or directories</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>cp<span class="w"> </span>file.txt<span class="w"> </span>/destination
+</code></pre></div>
+<h4 id="mv-move-or-rename-files">mv - Move or rename files:</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>mv<span class="w"> </span>file.txt<span class="w"> </span>newfile.txt
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>mv<span class="w"> </span>file.txt<span class="w"> </span>/new/location
+</code></pre></div>
+<h4 id="rm-remove-files-or-directories">rm - Remove files or directories:</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>rm<span class="w"> </span>file.txt
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>rm<span class="w"> </span>-r<span class="w"> </span>directory/<span class="w">    </span><span class="c1"># Remove directory and its contents</span>
+</code></pre></div>
+<h3 id="file-viewing-and-text-manipulation">File Viewing and Text Manipulation</h3>
+<h4 id="cat-display-file-content">cat - Display file content:</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>cat<span class="w"> </span>file.txt
+</code></pre></div>
+<h4 id="less-display-file-content-page-by-page">less - Display file content page by page:</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>less<span class="w"> </span>file.txt
+</code></pre></div>
+<h4 id="grep-search-for-a-specific-string-in-files">grep - Search for a specific string in files:</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>grep<span class="w"> </span><span class="s2">&quot;pattern&quot;</span><span class="w"> </span>file.txt
+</code></pre></div>
+<h3 id="data-transformation">Data Transformation</h3>
+<h4 id="cut-extract-specific-columns-from-a-file">cut - Extract specific columns from a file:</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>cut<span class="w"> </span>-d<span class="s1">&#39;,&#39;</span><span class="w"> </span>-f2,4<span class="w"> </span>file.csv<span class="w">    </span><span class="c1"># Extract columns 2 and 4 (comma-separated)</span>
+</code></pre></div>
+<h4 id="awk-powerful-text-processing-tool">awk - Powerful text processing tool:</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>awk<span class="w"> </span><span class="s1">&#39;{print $2}&#39;</span><span class="w"> </span>file.txt<span class="w">    </span><span class="c1"># Print second column</span>
+</code></pre></div>
+<h4 id="sed-stream-editor-for-text-manipulation">sed - Stream editor for text manipulation:</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>sed<span class="w"> </span><span class="s1">&#39;s/old/new/g&#39;</span><span class="w"> </span>file.txt<span class="w">   </span><span class="c1"># Replace &#39;old&#39; with &#39;new&#39;</span>
+</code></pre></div>
+<h3 id="data-filtering">Data Filtering</h3>
+<h4 id="sort-sort-lines-in-a-file">sort - Sort lines in a file:</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>sort<span class="w"> </span>file.txt
+</code></pre></div>
+<h4 id="uniq-filter-out-duplicate-lines">uniq - Filter out duplicate lines:</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>uniq<span class="w"> </span>file.txt
+</code></pre></div>
+<h4 id="head-and-tail-display-the-first-or-last-few-lines-of-a-file">head and tail - Display the first or last few lines of a file:</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>head<span class="w"> </span>-n<span class="w"> </span><span class="m">10</span><span class="w"> </span>file.txt<span class="w">    </span><span class="c1"># Display first 10 lines</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>tail<span class="w"> </span>-n<span class="w"> </span><span class="m">20</span><span class="w"> </span>file.txt<span class="w">    </span><span class="c1"># Display last 20 lines</span>
+</code></pre></div>
+<h3 id="file-compression-and-decompression">File Compression and Decompression</h3>
+<h4 id="gzip-compress-files">gzip - Compress files:</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>gzip<span class="w"> </span>file.txt<span class="w">    </span><span class="c1"># Creates file.txt.gz</span>
+</code></pre></div>
+<h4 id="gunzip-decompress-files">gunzip - Decompress files:</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>gunzip<span class="w"> </span>file.txt.gz
+</code></pre></div>
+<h3 id="running-scripts-and-executables">Running Scripts and Executables</h3>
+<h4 id="chmod-change-file-permissions">chmod - Change file permissions:</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>chmod<span class="w"> </span>+x<span class="w"> </span>script.sh<span class="w">    </span><span class="c1"># Add execute permission</span>
+</code></pre></div>
+<h4 id="-run-a-script-or-executable">./ - Run a script or executable:</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>./script.sh
+</code></pre></div>
+<h3 id="redirection-and-pipes">Redirection and Pipes</h3>
+<h4 id="-redirect-output-to-a-file-overwrite">&gt; - Redirect output to a file (overwrite):</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Hello, World!&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>output.txt
+</code></pre></div>
+<h4 id="-redirect-output-to-a-file-append">&gt;&gt; - Redirect output to a file (append):</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;More text&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>output.txt
+</code></pre></div>
+<h4 id="-pipe-operator-to-pass-output-from-one-command-as-input-to-another">| - Pipe operator to pass output from one command as input to another:</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>cat<span class="w"> </span>file.txt<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;pattern&quot;</span>
+</code></pre></div>
+<h3 id="variables-and-environment">Variables and Environment</h3>
+<h4 id="export-set-environment-variables">export - Set environment variables:</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">MY_VARIABLE</span><span class="o">=</span>value
+</code></pre></div>
+<h4 id="variable-access-the-value-of-an-environment-variable">$VARIABLE - Access the value of an environment variable:</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="nb">echo</span><span class="w"> </span><span class="nv">$PATH</span>
+</code></pre></div>
+<h3 id="loops-and-control-structures">Loops and Control Structures</h3>
+<h4 id="for-loop-iterate-over-a-list-of-items">for loop - Iterate over a list of items:</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="k">for</span><span class="w"> </span>item<span class="w"> </span><span class="k">in</span><span class="w"> </span>item1<span class="w"> </span>item2<span class="w"> </span>item3<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$item</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="k">done</span>
+</code></pre></div>
+<h4 id="if-statement-conditional-execution">if statement - Conditional execution:</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>condition<span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Condition is true&quot;</span>
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="k">fi</span>
+</code></pre></div>
+<h3 id="remote-file-operations-ssh">Remote File Operations (SSH)</h3>
+<h4 id="scp-securely-copy-files-between-local-and-remote-systems">scp - Securely copy files between local and remote systems:</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>scp<span class="w"> </span>local_file.txt<span class="w"> </span>user@remote_host:/path/to/destination
+</code></pre></div>
+<h4 id="ssh-securely-connect-to-a-remote-system">ssh - Securely connect to a remote system:</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>ssh<span class="w"> </span>user@remote_host
+</code></pre></div>
+<h3 id="finding-and-managing-processes">Finding and Managing Processes</h3>
+<h4 id="ps-display-currently-running-processes">ps - Display currently running processes:</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>ps<span class="w"> </span>aux
+</code></pre></div>
+<h4 id="kill-terminate-a-process-by-its-process-id">kill - Terminate a process by its process ID:</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="nb">kill</span><span class="w"> </span>PID
+</code></pre></div>
+<h3 id="cron-jobs-for-scheduled-tasks">Cron Jobs for Scheduled Tasks</h3>
+<h4 id="crontab-edit-user-specific-cron-jobs">crontab - Edit user-specific cron jobs:</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>crontab<span class="w"> </span>-e
+<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>
+<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="c1"># Example of a crontab entry to run a script every day at 2:00 AM:</span>
+<a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a>
+<a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a><span class="m">0</span><span class="w"> </span><span class="m">2</span><span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>/path/to/script.sh
+</code></pre></div>
+<h3 id="monitoring-disk-usage">Monitoring Disk Usage</h3>
+<h4 id="df-display-disk-space-usage">df - Display disk space usage:</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>df<span class="w"> </span>-h
+</code></pre></div>
+<h4 id="du-display-file-and-directory-disk-usage">du - Display file and directory disk usage:</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>du<span class="w"> </span>-sh<span class="w"> </span>/path/to/directory
+</code></pre></div>
+<h2 id="cheat-sheet">Cheat sheet</h2>
+<p><a href="https://www.alexji.com/UNIXCheatSheet.pdf">Unix command cheat sheet</a></p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.sections", "toc.integrate", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.dff1b7c8.min.js"></script>
+      
+    
+  </body>
+</html>

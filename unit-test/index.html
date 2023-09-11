@@ -1,0 +1,976 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://adhikari18.github.io/etl-101/unit-test/">
+      
+      
+        <link rel="prev" href="../talend/">
+      
+      
+        <link rel="next" href="../job-scenarios-pharma/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.2.8">
+    
+    
+      
+        <title>Unit Test - ETL 101</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.046329b4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.85d0ee34.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="purple">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#unit-test" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="ETL 101" class="md-header__button md-logo" aria-label="ETL 101" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ETL 101
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Unit Test
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="lime"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../oltp-vs-olap/" class="md-tabs__link">
+        
+  
+    
+  
+  ETL
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../etl-optimization/" class="md-tabs__link">
+        
+  
+    
+  
+  Optimization
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../sql/" class="md-tabs__link">
+        
+  
+    
+  
+  SQL
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../data-modeling/" class="md-tabs__link">
+        
+  
+    
+  
+  Modeling
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../scheduling/" class="md-tabs__link">
+        
+  
+    
+  
+  Scheduling
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../talend/" class="md-tabs__link">
+        
+  
+    
+  
+  Talend
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+    
+  
+  Unit Test
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../job-scenarios-pharma/" class="md-tabs__link">
+        
+  
+    
+  
+  Best Practice
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../aws-glue/" class="md-tabs__link">
+        
+  
+    
+  
+  AWS Glue
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../redshift/" class="md-tabs__link">
+        
+  
+    
+  
+  Redshift
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../git/" class="md-tabs__link">
+        
+  
+    
+  
+  Git
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../unix-commands/" class="md-tabs__link">
+        
+  
+    
+  
+  Unix
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="ETL 101" class="md-nav__button md-logo" aria-label="ETL 101" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    ETL 101
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oltp-vs-olap/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ETL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../etl-optimization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Optimization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sql/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SQL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-modeling/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Modeling
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scheduling/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Scheduling
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../talend/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Talend
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Unit Test
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Unit Test
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction:
+  </a>
+  
+    <nav class="md-nav" aria-label="Introduction:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#importance-of-unit-testing" class="md-nav__link">
+    Importance of Unit Testing:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#benefits-of-unit-testing" class="md-nav__link">
+    Benefits of Unit Testing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-talend-jobs-unit-test-cases" class="md-nav__link">
+    Creating Talend Jobs Unit Test Cases
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analyzing-talend-jobs-unit-test-results" class="md-nav__link">
+    Analyzing Talend Jobs Unit Test Results
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-by-step-tutorial" class="md-nav__link">
+    Step by step tutorial
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    Conclusion:
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../job-scenarios-pharma/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Best Practice
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aws-glue/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    AWS Glue
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../redshift/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Redshift
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../git/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Git
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unix-commands/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Unix
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="unit-test">Unit Test</h1>
+<p>Talend Jobs Unit Test Cases and Test Results with Examples from Pharmaceutical Data</p>
+<h2 id="introduction">Introduction:</h2>
+<p>Talend is widely used in the industry to facilitate data movement and transformation. As with any data processing system, testing is crucial to ensure the quality and reliability of the jobs developed using Talend. In this article, we will explore the importance of unit testing in Talend jobs and demonstrate how to create test cases and analyze test results using pharmaceutical data examples.</p>
+<h3 id="importance-of-unit-testing">Importance of Unit Testing:</h3>
+<p>Unit testing is the process of validating the functionality of individual units or components of a software application. In the context of Talend jobs, unit tests are designed to verify the correctness of individual data transformations, data filters, lookups, and other operations performed within the job.</p>
+<h3 id="benefits-of-unit-testing">Benefits of Unit Testing</h3>
+<ul>
+<li>
+<p>Early Detection of Bugs: Unit testing allows developers to identify and fix bugs during the development phase, reducing the chances of errors in the final production job.</p>
+</li>
+<li>
+<p>Maintaining Code Quality: Regular unit testing ensures that code quality is maintained, making it easier for developers to understand and modify the jobs when required.</p>
+</li>
+<li>
+<p>Continuous Integration: Unit tests can be integrated into the CI/CD (Continuous Integration/Continuous Deployment) pipeline to automate the testing process, leading to faster and more reliable releases.</p>
+</li>
+</ul>
+<h3 id="creating-talend-jobs-unit-test-cases">Creating Talend Jobs Unit Test Cases</h3>
+<ul>
+<li>
+<p>Input Data Preparation: For pharmaceutical data examples, we will consider a Talend job that processes data from various clinical trials. Prepare a representative dataset comprising patient information, treatment details, and trial outcomes.</p>
+</li>
+<li>
+<p>Define Test Cases: Create test cases to cover various scenarios such as valid data, invalid data, boundary conditions, and edge cases. Test cases should focus on testing different components of the Talend job, including data transformations, lookups, aggregations, and filtering.</p>
+</li>
+<li>
+<p>Test Data Flow: Verify that the data flows correctly through the job by comparing the input data with the expected output data after each transformation.</p>
+</li>
+<li>
+<p>Error Handling: Test the job's error handling capabilities by feeding erroneous data and ensuring that the job behaves as expected, providing appropriate error messages or logging.</p>
+</li>
+<li>
+<p>Performance Testing (Optional): Depending on the complexity of the Talend job, consider performing performance testing to assess the job's efficiency and resource utilization.</p>
+</li>
+</ul>
+<h3 id="analyzing-talend-jobs-unit-test-results">Analyzing Talend Jobs Unit Test Results</h3>
+<ul>
+<li>
+<p>Talend Test Cases Execution: Execute the defined test cases on the Talend job, ensuring that you have separate test and production environments to avoid any data corruption in the production system.</p>
+</li>
+<li>
+<p>Monitor Test Results: Analyze the test results to identify any failed test cases and the reasons for failure. Talend provides a test execution report that highlights the success and failure of each test case.</p>
+</li>
+<li>
+<p>Debugging Failures: When a test case fails, use Talend's debug mode to trace through the job and identify the exact point of failure. Inspect the data at different stages to pinpoint the issue.</p>
+</li>
+<li>
+<p>Regression Testing: After fixing the issues identified during unit testing, perform regression testing to ensure that the changes do not introduce new bugs.</p>
+</li>
+</ul>
+<h3 id="step-by-step-tutorial">Step by step tutorial</h3>
+<p>In this tutorial, we will walk you through the process of creating unit tests for a Talend job that processes pharmaceutical data. Specifically, we will demonstrate how to test the age range of patients participating in clinical trials. For this example, we assume you have a basic understanding of Talend Studio and have a sample pharmaceutical dataset available for testing.</p>
+<ul>
+<li>
+<p>Set Up the Talend Job:
+Create a new Talend job or use an existing one that processes pharmaceutical data. The job should extract data from a source (CSV, database, etc.), perform data transformations, and load the processed data into the target (database, CSV, etc.).</p>
+</li>
+<li>
+<p>Prepare the Test Data:
+Generate a sample dataset containing patient information, treatment details, and trial outcomes. Ensure the dataset includes different age groups, some within the valid range, and others outside the range to cover different test scenarios.</p>
+</li>
+<li>
+<p>Define the Test Cases:
+Identify the components within the Talend job that need to be tested. In our case, we are focusing on the age range validation. Define test cases to cover the following scenarios:
+a. Valid age range: Patients with ages within a predefined valid range.
+b. Invalid age range: Patients with ages outside the valid range.
+c. Edge cases: Patients with ages exactly at the minimum and maximum valid limits.</p>
+</li>
+<li>
+<p>Create the Test Job:
+In Talend Studio, create a new test job to perform unit testing. This job will execute the main job (the one processing pharmaceutical data) and validate the output against the expected results based on the test cases defined earlier.</p>
+</li>
+<li>
+<p>Configure the Test Job:
+In the test job, use the "tAssert" component to validate the output data. The "tAssert" component checks if a condition is true or false and raises an error if the condition fails. In our case, we will use "tAssert" to check if the patient ages fall within the expected range.</p>
+</li>
+<li>
+<p>Implement the Test Cases:
+a. Valid age range test case:</p>
+</li>
+</ul>
+<p>Use "tFixedFlowInput" component to create a sample dataset with patients having ages within the valid range.
+Connect the "tFixedFlowInput" to the main job.
+After the main job execution, use "tAssert" to verify that there are no errors and the output data is as expected.
+b. Invalid age range test case:</p>
+<p>Use "tFixedFlowInput" component to create a sample dataset with patients having ages outside the valid range.
+Connect the "tFixedFlowInput" to the main job.
+After the main job execution, use "tAssert" to verify that the expected error is raised due to invalid age range.
+c. Edge cases test case:</p>
+<p>Use "tFixedFlowInput" component to create a sample dataset with patients having ages exactly at the minimum and maximum valid limits.
+Connect the "tFixedFlowInput" to the main job.
+After the main job execution, use "tAssert" to verify that there are no errors and the output data is as expected.
+Run the Test Job:
+Execute the test job to run the unit tests. Talend will execute the main job with the different test datasets created for each test case and compare the output with the expected results.</p>
+<ul>
+<li>
+<p>Analyze Test Results:
+Review the test execution report generated by Talend. It will provide a detailed overview of which test cases passed and which ones failed, along with any errors encountered during execution.</p>
+</li>
+<li>
+<p>Debugging and Fixing Failures:
+If any test case fails, use Talend's debug mode to trace through the job and identify the point of failure. Inspect the data at different stages to pinpoint the issue. Once identified, make the necessary adjustments to the main job logic to address the failures.</p>
+</li>
+<li>
+<p>Perform Regression Testing:
+After fixing the issues identified during unit testing, rerun the test job to ensure that the changes do not introduce new bugs. Perform regression testing to validate the job's overall functionality.</p>
+</li>
+</ul>
+<h2 id="conclusion">Conclusion:</h2>
+<p>Unit testing is a critical part of the software development process, especially when dealing with sensitive data like pharmaceutical information. By following this step-by-step tutorial and leveraging Talend's testing capabilities, you can ensure the accuracy and integrity of your Talend jobs processing pharmaceutical data. Regular unit testing helps you identify and resolve issues early in the development process, leading to reliable and high-quality data integration solutions for the pharmaceutical domain.</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.sections", "toc.integrate", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.dff1b7c8.min.js"></script>
+      
+    
+  </body>
+</html>

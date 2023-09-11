@@ -53,3 +53,8 @@ Talend provides automation features that allow you to schedule your ETL jobs to 
 ### Tutorial 4 - error handling
 
 - Goal: Learn error handling using assert, rejects, unite, die etc.
+
+### Tutorial 5 
+
+- Return value from subjob, HashInput, HashOutput, GlobalMap, ConcurrentHashMap, Thread Safety while running in Parallel.
+
